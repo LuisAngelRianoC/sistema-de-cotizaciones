@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cotizaciones;
+use App\Models\Plazos;
+use App\Models\Productos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -27,9 +29,13 @@ class CotizacionesController extends Controller
         return view("cotizaciones.ver", compact('respuesta'));
     }
 
-    public function registrarCotizacion(Request $request)
+    public function registrarCotizacion()
     {
-        return view("cotizaciones.registrar");
+        $productos = Productos::all();
+        $plazos = Plazos::all();
+    
+        // Pasar productos y plazos a la vista
+        return view("cotizaciones.registrar", compact('productos', 'plazos'));
     }
 
     public function procesarRegistroCotizacion(Request $request)
@@ -45,9 +51,9 @@ class CotizacionesController extends Controller
         $id_cotizacion = DB::select('call crear_cotizacion(?, ?)', [
             $request->sku,
             $request->id_plazo,
-        ])[0]->id_cotizacion; // Asegúrate de que este campo exista en el resultado del procedimiento
+        ]); // Asegúrate de que este campo exista en el resultado del procedimiento
     
         // Redirigir a la vista de la cotización recién creada
-        return redirect()->route('cotizaciones.ver', ['id' => $id_cotizacion]);
+        return redirect()->route('cotizaciones.listar');
     }
 }

@@ -295,6 +295,12 @@ return [
 
     'menu' => [
 
+        [
+            'text' => 'Inicio',
+            'route' => 'home',
+            'icon' => 'fas fa-home',
+        ],
+
         ['header' => 'Procesos'],
         [
             'text' => 'Productos',

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 // Rutas para la gestión de Productos
 Route::controller(ProductosController::class)->group(function () {

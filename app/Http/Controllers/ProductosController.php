@@ -56,10 +56,10 @@ class ProductosController extends Controller
     public function actualizarProducto(Productos $producto)
     {
         return view("productos.actualizar", compact('producto'));
-    
     }
 
-    public function procesarActualizacionProducto(Request $request) {
+    public function procesarActualizacionProducto(Request $request)
+    {
         $request->validate([
             'sku' => ['required'],
             'nombre_producto' => ['required'],
@@ -79,8 +79,10 @@ class ProductosController extends Controller
         return redirect()->route('productos.listar');
     }
 
-    public function eliminarProducto(Productos $producto) {
+    public function eliminarProducto(Productos $producto)
+    {
         DB::select('call eliminar_producto(?)', array($producto->sku));
         return redirect()->route('productos.listar')->with('eliminar', 'ok');
     }
+
 }

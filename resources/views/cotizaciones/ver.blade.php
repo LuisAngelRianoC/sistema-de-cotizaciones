@@ -87,7 +87,7 @@
             </fieldset>
 
             <div class="form-group">
-                <a href="{{ route('productos.listar') }}" class="btn btn-primary">Regresar</a>
+                <a href="{{ route('cotizaciones.listar') }}" class="btn btn-primary">Regresar</a>
                 <button class="btn btn-secondary" onclick="window.print()">Imprimir</button>
             </div>
 
