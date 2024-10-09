@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Cotizaciones extends Model
 {
     protected $table = "cotizaciones_credito";
+    protected $primaryKey = 'id_cotizacion';
+    protected $keyType = 'INT';
 }

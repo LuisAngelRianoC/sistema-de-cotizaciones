@@ -42,11 +42,11 @@ Route::controller(PlazosController::class)->group(function () {
 
     // Ruta para mostrar el formulario de registrar un nuevo plazo
     Route::get('plazos/registrar', 'registrarPlazo')->name('plazos.registrar');
-    Route::post('plazos', 'procesarRegistroPlazo')->name('plazos.procesar');
+    Route::post('plazos', 'procesarRegistroPlazo')->name('plazos.procesarRegistroPlazo');
 
     // Ruta para mostrar el formulario de actualización de un plazo
     Route::get('plazos/{plazo}/actualizar', 'actualizarPlazo')->name('plazos.actualizar');
-    Route::put('plazos/{plazo}', 'procesarActualizacionPlazo')->name('plazos.procesar');
+    Route::put('plazos/{plazo}', 'procesarActualizacionPlazo')->name('plazos.procesarActualizacionPlazo');
 
     // Ruta para eliminar un plazo
     Route::delete('plazos/{plazo}', 'eliminarPlazo')->name('plazos.eliminar');
@@ -63,6 +63,6 @@ Route::controller(CotizacionesController::class)->group(function () {
 
     // Ruta para mostrar el formulario de registrar una nueva cotización
     Route::get('cotizaciones/registrar', 'registrarCotizacion')->name('cotizaciones.registrar');
-    Route::post('cotizaciones', 'procesarRegistroCotizacion')->name('cotizaciones.procesar');
+    Route::post('cotizaciones', 'procesarRegistroCotizacion')->name('cotizaciones.procesarRegistroCotizacion');
 
 });

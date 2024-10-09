@@ -1,0 +1,46 @@
+ /* Estilos para la impresión */
+ @media print {
+    /* Oculta los botones en la versión impresa */
+    .form-group {
+        display: none;
+    }
+    
+    /* Asegura que los campos de formulario se vean correctamente */
+    input.form-control {
+        border: none;
+        box-shadow: none;
+        font-size: 24px;
+        text-align: center;
+    }
+
+    /* Ajusta el tamaño del texto para mejorar la legibilidad en impresión */
+    label {
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    /* Aplica márgenes y estilos más cómodos para imprimir */
+    body {
+        font-size: 24px;
+        margin: 0;
+        padding: 0;
+        color: #000;
+    }
+
+    /* Estiliza títulos para que sean legibles en impresión */
+    h4 {
+        font-size: 20px;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    /* Conserva el estilo de la página, pero oculta la barra de navegación u otros elementos no deseados */
+    nav {
+        display: none;
+    }
+
+    /* Ajusta el tamaño del input para que sea más fácil de leer en la impresión */
+    .form-control {
+        font-size: 16px;
+    }
+}

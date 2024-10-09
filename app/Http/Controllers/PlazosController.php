@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Plazos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -11,7 +12,7 @@ class PlazosController extends Controller
     {
         if ($request->ajax()) {
             $respuesta = DB::select('call buscar_plazos');
-    
+
             return DataTables()->collection($respuesta)
                 ->addColumn('actions', 'plazos.dtButtons')
                 ->rawColumns(['actions'])
@@ -20,33 +21,69 @@ class PlazosController extends Controller
         return view("plazos.listar");
     }
 
-    public function mostrarRegistro(Request $request, $plazo)
+    public function mostrarRegistro(Plazos $plazo)
     {
-        // Lógica para mostrar un plazo específico
+        $respuesta = DB::select('call buscar_plazo_individual(?)', array($plazo->id_plazo))[0];
+        return view("plazos.ver", compact('respuesta'));
     }
 
     public function registrarPlazo(Request $request)
     {
-        // Lógica para mostrar el formulario de registro de un nuevo plazo
+        return view("plazos.registrar");
     }
 
     public function procesarRegistroPlazo(Request $request)
     {
-        // Lógica para procesar el registro de un nuevo plazo
+        $request->validate([
+            'duracion_semanas' => ['required'],
+            'descripcion_plazo' => ['required'],
+            'tasa_normal' => ['required'],
+            'tasa_puntual' => ['required'],
+        ], [
+            'required' => 'El campo :attribute es obligatorio.',
+        ]);
+
+        DB::select('call crear_plazo(?,?,?,?)', [
+            $request->duracion_semanas,
+            $request->descripcion_plazo,
+            $request->tasa_normal,
+            $request->tasa_puntual,
+        ]);
+
+        return redirect()->route('plazos.listar');
     }
 
-    public function actualizarPlazo(Request $request, $plazo)
+    public function actualizarPlazo(Plazos $plazo)
     {
-        // Lógica para mostrar el formulario de actualización de un plazo específico
+        return view("plazos.actualizar", compact('plazo'));
     }
 
     public function procesarActualizacionPlazo(Request $request, $plazo)
     {
-        // Lógica para procesar la actualización de un plazo
+        $request->validate([
+            'id_plazo' => ['required'],
+            'duracion_semanas' => ['required'],
+            'descripcion_plazo' => ['required'],
+            'tasa_normal' => ['required'],
+            'tasa_puntual' => ['required'],
+        ], [
+            'required' => 'El campo :attribute es obligatorio.',
+        ]);
+
+        DB::select('call actualizar_plazo(?,?,?,?,?)', [
+            $request->id_plazo,
+            $request->duracion_semanas,
+            $request->descripcion_plazo,
+            $request->tasa_normal,
+            $request->tasa_puntual
+        ]);
+
+        return redirect()->route('plazos.listar');
     }
 
-    public function eliminarPlazo(Request $request, $plazo)
+    public function eliminarPlazo(Plazos $plazo)
     {
-        // Lógica para eliminar un plazo específico
+        DB::select('call eliminar_plazo(?)', array($plazo->id_plazo));
+        return redirect()->route('plazos.listar')->with('eliminar', 'ok');
     }
 }
