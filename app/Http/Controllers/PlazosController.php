@@ -3,12 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PlazosController extends Controller
 {
     public function listarRegistros(Request $request)
     {
-        // Lógica para listar todos los plazos
+        if ($request->ajax()) {
+            $respuesta = DB::select('call buscar_plazos');
+    
+            return DataTables()->collection($respuesta)
+                ->addColumn('actions', 'plazos.dtButtons')
+                ->rawColumns(['actions'])
+                ->toJson();
+        }
+        return view("plazos.listar");
     }
 
     public function mostrarRegistro(Request $request, $plazo)

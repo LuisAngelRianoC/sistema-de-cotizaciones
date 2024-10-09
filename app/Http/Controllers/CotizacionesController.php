@@ -3,12 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CotizacionesController extends Controller
 {
     public function listarRegistros(Request $request)
     {
-        // Lógica para listar todas las cotizaciones
+        if ($request->ajax()) {
+            $respuesta = DB::select('call mostrar_cotizaciones');
+
+            return DataTables()->collection($respuesta)
+                ->addColumn('actions', 'cotizaciones.dbButtons')
+                ->rawColumns(['actions'])
+                ->toJson();
+        }
+        return view("cotizaciones.listar");
     }
 
     public function mostrarRegistro(Request $request, $cotizacion)
