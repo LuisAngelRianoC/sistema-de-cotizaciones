@@ -21,7 +21,7 @@
     @endif
 
     <div class="card">
-        <a href="{{ route('productos.registrar') }}" title="Agregar producto" class="btn btn-primary">Agregar</a>
+        <a href="{{ route('productos.agregar') }}" title="Agregar producto" class="btn btn-primary">Agregar</a>
 
         <div class="card-body">
             <table class="table table-striped" id="tablaProductos" data-route="{{ route('productos.listar') }}">

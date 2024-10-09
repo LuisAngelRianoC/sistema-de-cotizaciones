@@ -19,12 +19,12 @@ Route::controller(ProductosController::class)->group(function () {
     Route::get('productos/{producto}/detalles', 'mostrarRegistro')->name('productos.ver');
 
     // Ruta para mostrar el formulario de agregar un nuevo producto
-    Route::get('productos/registrar', 'registrarProducto')->name('productos.registrar');
-    Route::post('productos', 'procesarAgregado')->name('productos.procesar');
+    Route::get('productos/registrar', 'registrarProducto')->name('productos.agregar');
+    Route::post('productos', 'procesarAgregado')->name('productos.procesarAgregado');
 
     // Ruta para mostrar el formulario de actualización de un producto
     Route::get('productos/{producto}/actualizar', 'actualizarProducto')->name('productos.actualizar');
-    Route::put('productos/{producto}', 'procesarActualizacionProducto')->name('productos.procesar');
+    Route::put('productos/{producto}', 'procesarActualizacionProducto')->name('productos.procesarActualizacionProducto');
 
     // Ruta para eliminar un producto
     Route::delete('productos/{producto}', 'eliminarProducto')->name('productos.eliminar');
